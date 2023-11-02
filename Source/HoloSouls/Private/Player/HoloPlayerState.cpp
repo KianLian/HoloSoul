@@ -1,25 +1,22 @@
 // Code by Kian
 
 
-#include "Character/HoloEnemy.h"
+#include "Player/HoloPlayerState.h"
 
 #include "Ability System/HoloAbilitySystemComponent.h"
 #include "Ability System/HoloAttributeSet.h"
 
-AHoloEnemy::AHoloEnemy()
+AHoloPlayerState::AHoloPlayerState()
 {
+	NetUpdateFrequency = 100.f;
+
 	AbilitySystemComponent = CreateDefaultSubobject<UHoloAbilitySystemComponent>(TEXT("AbilitySystemComponent"));
 	AbilitySystemComponent->SetIsReplicated(true);
 
 	AttributeSet = CreateDefaultSubobject<UHoloAttributeSet>(TEXT("AttributeSet"));
 }
 
-void AHoloEnemy::Highlight()
+UAbilitySystemComponent* AHoloPlayerState::GetAbilitySystemComponent() const
 {
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Overlap Begin"));
-}
-
-void AHoloEnemy::UnHighlight()
-{
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Overlap End"));
+	return AbilitySystemComponent;
 }

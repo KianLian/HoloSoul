@@ -3,8 +3,8 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "HighlightInterface.h"
 #include "Character/HoloCharacter.h"
+#include "Interfaces/HighlightInterface.h"
 #include "HoloEnemy.generated.h"
 
 /**

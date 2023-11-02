@@ -2,12 +2,11 @@
 
 
 #include "Character/AquaCharacter.h"
-
-#include "HighlightInterface.h"
 #include "Camera/CameraComponent.h"
 #include "Components/SphereComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/SpringArmComponent.h"
+#include "Interfaces/HighlightInterface.h"
 
 AAquaCharacter::AAquaCharacter()
 {
@@ -64,7 +63,6 @@ void AAquaCharacter::OnDataDisplaySphereOverlapBegin(UPrimitiveComponent* Overla
 	{
 				
 	}
-	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Overlap Begin"));
 }
 
 void AAquaCharacter::OnDataDisplaySphereOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor,

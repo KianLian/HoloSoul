@@ -11,6 +11,11 @@ AHoloCharacter::AHoloCharacter()
 
 }
 
+UAbilitySystemComponent* AHoloCharacter::GetAbilitySystemComponent() const
+{
+	return AbilitySystemComponent;
+}
+
 // Called when the game starts or when spawned
 void AHoloCharacter::BeginPlay()
 {

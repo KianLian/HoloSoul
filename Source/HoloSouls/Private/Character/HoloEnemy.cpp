@@ -10,6 +10,7 @@ AHoloEnemy::AHoloEnemy()
 {
 	AbilitySystemComponent = CreateDefaultSubobject<UHoloAbilitySystemComponent>(TEXT("AbilitySystemComponent"));
 	AbilitySystemComponent->SetIsReplicated(true);
+	AbilitySystemComponent->SetReplicationMode(EGameplayEffectReplicationMode::Minimal);
 
 	AttributeSet = CreateDefaultSubobject<UHoloAttributeSet>(TEXT("AttributeSet"));
 }

@@ -12,6 +12,7 @@ AHoloPlayerState::AHoloPlayerState()
 
 	AbilitySystemComponent = CreateDefaultSubobject<UHoloAbilitySystemComponent>(TEXT("AbilitySystemComponent"));
 	AbilitySystemComponent->SetIsReplicated(true);
+	AbilitySystemComponent->SetReplicationMode(EGameplayEffectReplicationMode::Mixed);
 
 	AttributeSet = CreateDefaultSubobject<UHoloAttributeSet>(TEXT("AttributeSet"));
 }

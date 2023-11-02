@@ -18,6 +18,9 @@ class HOLOSOULS_API AHoloPlayerState : public APlayerState, public IAbilitySyste
 public:
 	AHoloPlayerState();
 
+	virtual class UAbilitySystemComponent* GetAbilitySystemComponent() const override;
+	FORCEINLINE class UAttributeSet* GetAttributeSet() const { return AttributeSet; }
+
 	protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Ability, meta = (AllowPrivateAccess = "true"))
 	TObjectPtr<class UAbilitySystemComponent> AbilitySystemComponent;

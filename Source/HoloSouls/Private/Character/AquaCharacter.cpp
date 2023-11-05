@@ -2,11 +2,14 @@
 
 
 #include "Character/AquaCharacter.h"
+
+#include "AbilitySystemComponent.h"
 #include "Camera/CameraComponent.h"
 #include "Components/SphereComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Interfaces/HighlightInterface.h"
+#include "Player/HoloPlayerState.h"
 
 AAquaCharacter::AAquaCharacter()
 {
@@ -55,23 +58,42 @@ void AAquaCharacter::BeginPlay()
 void AAquaCharacter::OnDataDisplaySphereOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor,
                                                      UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	if(auto ActorInSphere = Cast<IHighlightInterface>(OtherActor))
+	if(const auto ActorInSphere = Cast<IHighlightInterface>(OtherActor))
 	{
 		ActorInSphere->Highlight();
-	}
-	else
-	{
-				
 	}
 }
 
 void AAquaCharacter::OnDataDisplaySphereOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor,
 	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
-	if (auto ActorInSphere = Cast<IHighlightInterface>(OtherActor))
+	if (const auto ActorInSphere = Cast<IHighlightInterface>(OtherActor))
 	{
 		ActorInSphere->UnHighlight();
 	}
 	
+}
+
+void AAquaCharacter::PossessedBy(AController* NewController)
+{
+	Super::PossessedBy(NewController);
+
+	//Init Ability in server by accessing the ability system component in the PlayerState
+	InitAbilityActorInfo();
+}
+
+void AAquaCharacter::OnRep_PlayerState()
+{
+	Super::OnRep_PlayerState();
+	InitAbilityActorInfo();
+}
+
+void AAquaCharacter::InitAbilityActorInfo()
+{
+	AHoloPlayerState* HoloPlayerState = GetPlayerState<AHoloPlayerState>();
+	check(HoloPlayerState);
+	HoloPlayerState->GetAbilitySystemComponent()->InitAbilityActorInfo(HoloPlayerState, this);
+	AbilitySystemComponent = HoloPlayerState->GetAbilitySystemComponent();
+	AttributeSet = HoloPlayerState->GetAttributeSet();
 }
 
